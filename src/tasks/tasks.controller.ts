@@ -24,27 +24,27 @@ export class TasksController {
     createPropertyDto: CreateTaskDto,
   ) {
     return {
-      property: await this.tasksService.create(createPropertyDto),
+      task: await this.tasksService.create(createPropertyDto),
     };
   }
 
   @Get()
   async findAll() {
-    return { properties: await this.tasksService.findAll() };
+    return { tasks: await this.tasksService.findAll() };
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return { property: await this.tasksService.findOne(+id) };
+    return { task: await this.tasksService.findOne(+id) };
   }
 
   @Put(':id')
-  update(
+  async update(
     @Param('id') id: string,
     @Body(new ValidationPipe({ transform: true, whitelist: true }))
-    updatePropertyDto: UpdateTaskDto,
+    UpdateTaskDto: UpdateTaskDto,
   ) {
-    return { task: this.tasksService.update(+id, updatePropertyDto) };
+    return { task: await this.tasksService.update(+id, UpdateTaskDto) };
   }
 
   @Delete(':id')

@@ -28,7 +28,19 @@ export class Task {
   @Property({ nullable: true, default: TaskStatus.PENDING })
   status?: number = TaskStatus.PENDING;
 
-  @Property({ length: 250, nullable: true })
+  @Property({
+    length: 250,
+    nullable: true,
+    serializer: (p: string) => {
+      if (!p) {
+        return null;
+      }
+      const baseUrl =
+        (process.env.BASE_URL || 'http://localhost:3000') +
+        (process.env.BASE_PATH || '');
+      return `${baseUrl}/${p}`;
+    },
+  })
   filepath?: string;
 
   @Property({

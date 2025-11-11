@@ -1,4 +1,10 @@
-import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateTaskDto {
   @IsString()
@@ -15,14 +21,18 @@ export class CreateTaskDto {
   deadLine?: Date;
 
   @IsString()
+  @IsOptional()
   address?: string;
 
   @IsString()
+  @IsOptional()
   filepath?: string;
 
   @IsNumber()
+  @IsOptional()
   lat?: number;
 
   @IsNumber()
+  @IsOptional()
   lng?: number;
 }

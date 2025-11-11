@@ -42,10 +42,12 @@ export class TasksService {
     return newTask;
   }
 
-  async update(id: number, updatePropertyDto: UpdateTaskDto) {
-    const property = await this.taskRepository.findOneOrFail(id);
-    Object.assign(property, updatePropertyDto);
-    return this.taskRepository.getEntityManager().persistAndFlush(property);
+  async update(id: number, updateTaskDto: UpdateTaskDto) {
+    const task = await this.taskRepository.findOneOrFail(id);
+    Object.assign(task, updateTaskDto);
+    console.log(updateTaskDto);
+    await this.taskRepository.getEntityManager().persistAndFlush(task);
+    return task;
   }
 
   async remove(id: number): Promise<Task> {
