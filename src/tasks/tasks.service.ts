@@ -54,7 +54,7 @@ export class TasksService {
     const task = await this.taskRepository.findOneOrFail({ id });
 
     if (task.filepath) {
-      await this.imageService.removeImage(task.filepath);
+      await this.imageService.removeImage(task.filepath).catch(console.error);
     }
     await this.taskRepository.getEntityManager().removeAndFlush(task);
     return task;
